@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Inicio</h1>
+      <div *ngIf="this.productosService.carrito.length>0">
+        <h2>Carrito</h2>
+        <table class="table">
+          <tr *ngFor="let comprado of this.productosService.carrito">
+            <td>{{comprado.nombre}}</td>
+            <td>{{comprado.precio*comprado.unidades | number }} €</td>
+            <td>
+              <button class="btn btn-default btn-xs" (click)="quitar(comprado)">-</button>
+              {{comprado.unidades}} unidades
+              <button class="btn btn-default btn-xs" (click)="anadir(comprado)">+</button>
+            </td>
+            <td><button class="btn btn-danger" (click)="eliminar(comprado)">Eliminar</button></td>
+          </tr>
+          <tr>
+            <td>Total:</td>
+            <td>{{this.productosService.calcularCompradoTotal() | number }} €</td>
+            <td></td>
+            <td><button class="btn btn-warning">Finalizar compra</button></td>
+          </tr>
+        </table>
+      </div>
+      <h2>Catálogo de productos</h2>
+      <div class="producto" *ngFor="let producto of productos">
+        <h4>{{producto.nombre}}</h4>
+        <p>{{producto.descripcion}}</p>
+        <button class="btn btn-warning" (click)="verProducto(producto._id)">Ver</button>
+        <button class="btn btn-success" (click)="comprar(producto)">Comprar</button>
+      </div>
+    </div>
+  </div>
+</div>
